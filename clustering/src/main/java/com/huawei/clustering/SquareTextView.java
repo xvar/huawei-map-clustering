@@ -2,13 +2,14 @@ package com.huawei.clustering;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import androidx.appcompat.widget.AppCompatTextView;
+import android.widget.TextView;
+
 
 /**
  * Cluster Icon
  */
 
-class SquareTextView extends AppCompatTextView {
+class SquareTextView extends TextView {
 
     public SquareTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
