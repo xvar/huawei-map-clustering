@@ -20,6 +20,10 @@ class QuadTree<T extends QuadTreePoint> {
         root.insert(point);
     }
 
+    void remove(@NonNull T point) {
+        root.remove(point);
+    }
+
     @NonNull
     List<T> queryRange(double north, double west, double south, double east) {
         List<T> points = new ArrayList<>();

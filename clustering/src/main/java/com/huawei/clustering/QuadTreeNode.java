@@ -21,6 +21,26 @@ class QuadTreeNode<T extends QuadTreePoint> {
         this.bucketSize = bucketSize;
     }
 
+    boolean remove(@NonNull T point) {
+        if (points.remove(point))
+            return true;
+
+        if (northWest != null && northWest.points.remove(point))
+            return true;
+
+        if (northEast != null && northEast.points.remove(point))
+            return true;
+
+        if (southWest != null && southWest.points.remove(point))
+            return true;
+
+        if (southEast != null && southEast.points.remove(point))
+            return true;
+
+        //nothing to remove
+        return false;
+    }
+
     boolean insert(@NonNull T point) {
         // Ignore objects that do not belong in this quad tree.
         if (!bounds.contains(point.getLatitude(), point.getLongitude())) {

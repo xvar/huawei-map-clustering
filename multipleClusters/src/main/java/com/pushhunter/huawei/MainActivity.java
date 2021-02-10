@@ -80,7 +80,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             clusterItems.add(new MyItem(
                     RandomLocationGenerator.generate(DEUTSCHLAND)));
         }
-        clusterManager.addItems(clusterItems);
+        clusterManager.replaceItems(clusterItems);
 
         //Cluster Items 2 by using addItem
         for (int i = 0; i < 100000; i++) {

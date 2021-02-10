@@ -119,9 +119,56 @@ public class ClusterManager<T extends ClusterItem> implements HuaweiMap.OnCamera
      *
      * @param clusterItems the items to be clustered
      */
-    public void addItems(@NonNull List<T> clusterItems) {
+    public void replaceItems(@NonNull List<T> clusterItems) {
         Preconditions.checkNotNull(clusterItems);
         buildQuadTree(clusterItems);
+    }
+
+    public void replaceItem(@NonNull final T item) {
+        Preconditions.checkNotNull(item);
+        quadTreeWriteLock(new Runnable() {
+            @Override
+            public void run() {
+                mQuadTree.remove(item);
+                mQuadTree.insert(item);
+            }
+        });
+    }
+
+    public void removeItem(@NonNull final T item) {
+        Preconditions.checkNotNull(item);
+        quadTreeWriteLock(new Runnable() {
+            @Override
+            public void run() {
+                mQuadTree.remove(item);
+            }
+        });
+    }
+
+    public void removeItems(@NonNull final List<T> clusterItems) {
+        Preconditions.checkNotNull(clusterItems);
+        quadTreeWriteLock(new Runnable() {
+            @Override
+            public void run() {
+                for (T item: clusterItems) {
+                    Preconditions.checkNotNull(item);
+                    mQuadTree.remove(item);
+                }
+            }
+        });
+    }
+
+    public void addItems(@NonNull final List<T> clusterItems) {
+        Preconditions.checkNotNull(clusterItems);
+        quadTreeWriteLock(new Runnable() {
+            @Override
+            public void run() {
+                for (T item: clusterItems) {
+                    Preconditions.checkNotNull(item);
+                    mQuadTree.insert(item);
+                }
+            }
+        });
     }
 
     public void addItem(@NonNull final T clusterItem) {
