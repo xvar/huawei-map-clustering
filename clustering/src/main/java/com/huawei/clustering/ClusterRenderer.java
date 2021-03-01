@@ -41,9 +41,14 @@ class ClusterRenderer<T extends ClusterItem> implements HuaweiMap.OnMarkerClickL
 
     private ClusterManager.Callbacks<T> mCallbacks;
 
-    ClusterRenderer(@NonNull Context context, @NonNull HuaweiMap huaweiMap) {
+    ClusterRenderer(
+            @NonNull Context context,
+            @NonNull HuaweiMap huaweiMap,
+            @NonNull SharedOnMarkerClickListener listener
+    ) {
         mHuaweiMap = huaweiMap;
-        mHuaweiMap.setOnMarkerClickListener(this);
+        listener.addListener(this);
+        mHuaweiMap.setOnMarkerClickListener(listener);
         mIconGenerator = new DefaultIconGenerator<>(context);
         mRenderPostProcessor = new DefaultRenderPostProcessor<>();
     }

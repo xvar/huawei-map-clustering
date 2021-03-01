@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.huawei.clustering.SharedOnMarkerClickListener;
 import com.huawei.hms.maps.HuaweiMap;
 import com.huawei.hms.maps.model.BitmapDescriptor;
 import com.huawei.hms.maps.model.LatLng;
@@ -35,12 +36,13 @@ public final class MarkerRenderer<T> {
     public MarkerRenderer(
             @NonNull HuaweiMap huaweiMap,
             @NonNull MarkerManager.IconGenerator<T> iconGenerator,
-            @NonNull MarkerManager.LatLngGenerator<T> latLngGenerator
+            @NonNull MarkerManager.LatLngGenerator<T> latLngGenerator,
+            @NonNull SharedOnMarkerClickListener listener
     ) {
         this.huaweiMap = huaweiMap;
         this.iconGenerator = iconGenerator;
         this.latLngGenerator = latLngGenerator;
-        this.huaweiMap.setOnMarkerClickListener(new HuaweiMap.OnMarkerClickListener() {
+        listener.addListener(new HuaweiMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 if (clickListener == null)
@@ -55,6 +57,7 @@ public final class MarkerRenderer<T> {
                 return false;
             }
         });
+        this.huaweiMap.setOnMarkerClickListener(listener);
     }
 
 

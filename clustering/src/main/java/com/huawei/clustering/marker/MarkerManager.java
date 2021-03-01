@@ -3,6 +3,7 @@ package com.huawei.clustering.marker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.huawei.clustering.SharedOnMarkerClickListener;
 import com.huawei.hms.maps.HuaweiMap;
 import com.huawei.hms.maps.model.BitmapDescriptor;
 
@@ -33,11 +34,12 @@ public final class MarkerManager<T> {
     private final MarkerRenderer<T> renderer;
 
     public MarkerManager(
-        @NonNull HuaweiMap huaweiMap,
-        @NonNull IconGenerator<T> iconGenerator,
-        @NonNull LatLngGenerator<T> latLngGenerator
+            @NonNull HuaweiMap huaweiMap,
+            @NonNull IconGenerator<T> iconGenerator,
+            @NonNull LatLngGenerator<T> latLngGenerator,
+            @NonNull SharedOnMarkerClickListener listener
     ) {
-        renderer = new MarkerRenderer<>(huaweiMap, iconGenerator, latLngGenerator);
+        renderer = new MarkerRenderer<>(huaweiMap, iconGenerator, latLngGenerator, listener);
     }
 
     public void setOnItemClickListener(@Nullable ItemClickListener<T> listener) {

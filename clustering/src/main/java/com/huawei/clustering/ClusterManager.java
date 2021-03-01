@@ -77,10 +77,14 @@ public class ClusterManager<T extends ClusterItem> implements HuaweiMap.OnCamera
      *
      * @param huawei the map instance where markers will be rendered
      */
-    public ClusterManager(@NonNull Context context, @NonNull HuaweiMap huawei) {
+    public ClusterManager(
+            @NonNull Context context,
+            @NonNull HuaweiMap huawei,
+            @NonNull SharedOnMarkerClickListener listener
+    ) {
         Preconditions.checkNotNull(context);
         mHuaweiMap = Preconditions.checkNotNull(huawei);
-        mRenderer = new ClusterRenderer<>(context, huawei);
+        mRenderer = new ClusterRenderer<>(context, huawei, listener);
         mQuadTree = new QuadTree<>(QUAD_TREE_BUCKET_CAPACITY);
     }
 

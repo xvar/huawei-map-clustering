@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.huawei.clustering.Cluster;
 import com.huawei.clustering.ClusterManager;
 import com.huawei.clustering.IconGenerator;
+import com.huawei.clustering.SharedOnMarkerClickListener;
 import com.huawei.hms.maps.CameraUpdateFactory;
 import com.huawei.hms.maps.HuaweiMap;
 import com.huawei.hms.maps.OnMapReadyCallback;
@@ -60,8 +61,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         //Cluster Manager 1 & 2
-        final ClusterManager<MyItem> clusterManager = new ClusterManager<>(this, huaweiMap);
-        final ClusterManager<MyItem> clusterManager2 = new ClusterManager<>(this, huaweiMap);
+        final SharedOnMarkerClickListener listener = new SharedOnMarkerClickListener();
+        final ClusterManager<MyItem> clusterManager = new ClusterManager<>(this, huaweiMap, listener);
+        final ClusterManager<MyItem> clusterManager2 = new ClusterManager<>(this, huaweiMap, listener);
 
         clusterManagers(clusterManager);
         clusterManagers(clusterManager2);
