@@ -25,16 +25,16 @@ class QuadTreeNode<T extends QuadTreePoint> {
         if (points.remove(point))
             return true;
 
-        if (northWest != null && northWest.points.remove(point))
+        if (northWest != null && northWest.remove(point))
             return true;
 
-        if (northEast != null && northEast.points.remove(point))
+        if (northEast != null && northEast.remove(point))
             return true;
 
-        if (southWest != null && southWest.points.remove(point))
+        if (southWest != null && southWest.remove(point))
             return true;
 
-        if (southEast != null && southEast.points.remove(point))
+        if (southEast != null && southEast.remove(point))
             return true;
 
         //nothing to remove
