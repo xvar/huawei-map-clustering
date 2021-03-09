@@ -219,17 +219,16 @@ public class ClusterManager<T extends ClusterItem> implements HuaweiMap.OnCamera
     }
 
     public void cluster() {
-        clusterTaskLock.writeLock().lock();
-        try {
-            if (mClusterTask != null) {
-                mClusterTask.cancel(true);
-            }
-
-            mClusterTask = new ClusterTask(mHuaweiMap.getProjection().getVisibleRegion().latLngBounds,
-                    mHuaweiMap.getCameraPosition().zoom).executeOnExecutor(mExecutor);
-        } finally {
-            clusterTaskLock.writeLock().unlock();
+        /*if (mClusterTask != null) {
+            mClusterTask.cancel(true);
         }
+
+        mClusterTask = new ClusterTask(mHuaweiMap.getProjection().getVisibleRegion().latLngBounds,
+                mHuaweiMap.getCameraPosition().zoom).executeOnExecutor(mExecutor);*/
+
+        List<Cluster<T>> clusters = getClusters(mHuaweiMap.getProjection().getVisibleRegion().latLngBounds,
+                mHuaweiMap.getCameraPosition().zoom);
+        mRenderer.render(clusters);
     }
 
     @NonNull
