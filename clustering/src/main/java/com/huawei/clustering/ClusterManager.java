@@ -37,7 +37,6 @@ public class ClusterManager<T extends ClusterItem> implements HuaweiMap.OnCamera
     private final Executor mExecutor = Executors.newSingleThreadExecutor();
 
     private final ReentrantReadWriteLock quadTreeLock = new ReentrantReadWriteLock();
-    private final ReadWriteLock clusterTaskLock = new ReentrantReadWriteLock();
 
     private AsyncTask mQuadTreeTask;
 
@@ -219,13 +218,6 @@ public class ClusterManager<T extends ClusterItem> implements HuaweiMap.OnCamera
     }
 
     public void cluster() {
-        /*if (mClusterTask != null) {
-            mClusterTask.cancel(true);
-        }
-
-        mClusterTask = new ClusterTask(mHuaweiMap.getProjection().getVisibleRegion().latLngBounds,
-                mHuaweiMap.getCameraPosition().zoom).executeOnExecutor(mExecutor);*/
-
         List<Cluster<T>> clusters = getClusters(mHuaweiMap.getProjection().getVisibleRegion().latLngBounds,
                 mHuaweiMap.getCameraPosition().zoom);
         mRenderer.render(clusters);
