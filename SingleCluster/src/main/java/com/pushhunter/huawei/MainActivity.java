@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.huawei.clustering.Cluster;
 import com.huawei.clustering.ClusterManager;
+import com.huawei.clustering.SharedOnMarkerClickListener;
 import com.huawei.hms.maps.CameraUpdateFactory;
 import com.huawei.hms.maps.HuaweiMap;
 import com.huawei.hms.maps.OnMapReadyCallback;
@@ -45,7 +46,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        ClusterManager<SampleClusterItem> clusterManager = new ClusterManager<>(this, huaweiMap);
+        SharedOnMarkerClickListener listener = new SharedOnMarkerClickListener();
+        ClusterManager<SampleClusterItem> clusterManager = new ClusterManager<>(this, huaweiMap, listener);
         clusterManager.setCallbacks(new ClusterManager.Callbacks<SampleClusterItem>() {
             @Override
             public boolean onClusterClick(Cluster<SampleClusterItem> cluster) {
